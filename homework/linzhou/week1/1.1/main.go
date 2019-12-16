@@ -6,22 +6,10 @@ import (
 
 func print(count chan int, trigger chan int, done chan bool, prefix string) {
 	for {
-		odd := <-count
-		if odd <= 100 {
-			fmt.Println(prefix, " : ", odd)
-			trigger <- odd + 1
-		} else {
-			done <- true
-			return
-		}
-	}
-}
-func printEven(count chan int, trigger chan int, done chan bool) {
-	for {
-		odd := <-count
-		if odd <= 100 {
-			fmt.Println("printEven: ", odd)
-			trigger <- odd + 1
+		total := <-count
+		if total <= 100 {
+			fmt.Println(prefix, " : ", total)
+			trigger <- total + 1
 		} else {
 			done <- true
 			return
